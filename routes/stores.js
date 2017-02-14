@@ -6,6 +6,12 @@ var mysql = require('mysql');
 var router = express.Router();
 
 var pool = mysql.createPool({
+    connectionLimit: 10, //important
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'delivery_mate',
+    debug: false
 });
 
 
@@ -14,8 +20,8 @@ function getStores(req, res, next) {
     var dong_code = req.query.dong_code;
     var stores = [];
     pool.query('SELECT s.id, s.name, s.image_url '+
-                'FROM stores s JOIN delivery_zones d ON s.id = d.stores_id ' +
-                'WHERE s.categories_id = ? AND (d.dong_code LIKE ? OR d.dong_code = ?)',
+                'FROM stores s JOIN delivery_zones d ON s.id = d.store_id ' +
+                'WHERE s.category_id = ? AND (d.dong_code LIKE ? OR d.dong_code = ?)',
                 [category_id, dong_code.substr(0,5)+'%', dong_code], function (err, rows) {
         if (!err) {
             rows.forEach(function (row) {

@@ -6,6 +6,12 @@ var mysql = require('mysql');
 var router = express.Router();
 
 var pool = mysql.createPool({
+    connectionLimit: 10, //important
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'delivery_mate',
+    debug: false
 });
 
 function getCategories(req, res, next) {

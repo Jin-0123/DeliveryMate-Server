@@ -7,6 +7,12 @@ var waterfall = require("async/waterfall");
 var router = express.Router();
 
 var pool = mysql.createPool({
+    connectionLimit: 10, //important
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'delivery_mate',
+    debug: false
 });
 
 
