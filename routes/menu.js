@@ -17,8 +17,8 @@ var pool = mysql.createPool({
 function getMenu(req, res, next) {
     var store_id = req.query.store_id;
     var menu = [];
-    pool.query(' SELECT id, name, price, type, require_people_num, main_count, extra_count '+
-                ' FROM (SELECT id, name, price, type, require_people_num FROM menu WHERE store_id = ?) as menu, '+
+    pool.query(' SELECT id, name, price, type, require_people_num, image_url, main_count, extra_count '+
+                ' FROM (SELECT id, name, price, type, require_people_num, image_url FROM menu WHERE store_id = ?) as menu, '+
                     '(SELECT count(id) as main_count FROM menu WHERE store_id = ? AND type="main") as main, '+
                     '(SELECT count(id) as extra_count FROM menu WHERE store_id = ? AND type="extra") as extra '
             , [store_id, store_id, store_id], function (err, rows) {
