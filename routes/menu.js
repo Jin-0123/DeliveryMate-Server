@@ -30,6 +30,7 @@ function getMenu(req, res, next) {
                         'price' : row.price,
                         'type' : row.type,
                         'require_people_num' : row.require_people_num,
+                        'image_url' : row.image_url,
                         'main_count' : row.main_count,
                         'extra_count' : row.extra_count
                     };
