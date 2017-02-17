@@ -6,7 +6,7 @@ var router = express.Router();
 
 var pool = mysql.createPool({
     connectionLimit: 10, //important
-    host: 'localhost',s
+    host: 'localhost',
     user: 'root',
     password: '',
     database: 'delivery_mate',
@@ -88,7 +88,7 @@ function getUser(req, res, next) {
                             'FROM users ' +
                             'WHERE u_id=?', [uid], function (err, rows)  {
                         if (!err) {
-                            if (rows[0].id != null)  {
+                            if (rows != "")  {
                                 result =  rows[0].id
 
                             } else {

@@ -22,7 +22,12 @@ function registerOrder(req, res, next) {
     var user_id = req.body.user_id;
     var store_id = req.body.store_id;
     var main_menu_id = req.body.main_menu_id;
+    var extra_menu = req.body.extra_menu;
 
+    console.log(user_id)
+    console.log(store_id)
+    console.log(main_menu_id)
+    console.log(extra_menu)
     waterfall([
         function(callback){
             var expire_time = req.body.expire_time;
@@ -41,7 +46,6 @@ function registerOrder(req, res, next) {
         },
 
         function(pool, order_id, callback) {
-            var extra_menu = req.body.extra_menu;
             var valueQuery = "";
             var valueIdx = 1;
 
@@ -93,12 +97,14 @@ function registerOrder(req, res, next) {
                         // 2. 현재 주문 수보다 충족 수가 작을 경우 처리
                         if (rows.length == 0) {
                             result = {
+				"message":"success",
                                 "status": "waiting",
                                 "current_people_num": 1
                             };
                         }
                         else if ( (rows.length + 1) < rows[0].require_people_num ) {
                             result = {
+				"message":"success",
                                 "status": "waiting",
                                 "current_people_num": rows.length,
                                 "require_people_num": rows[0].require_people_num
@@ -117,6 +123,7 @@ function registerOrder(req, res, next) {
                             matchOrder += ")";
 
                             result = {
+				"message":"success",
                                 "status" : "match",
                                 "match_order_id" : matchOrder,
                                 "match_push_user_id" : matchPuchUser
