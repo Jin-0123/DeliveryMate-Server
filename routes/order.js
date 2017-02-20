@@ -33,7 +33,7 @@ function registerOrder(req, res, next) {
                         callback(null, pool, rows.insertId);
 
                     } else {
-                        res.json({"message": "fail"});
+                        res.json({'message': 'fail'});
                         console.log('Error while performing Query.', err);
                     }
                 });
@@ -67,12 +67,12 @@ function registerOrder(req, res, next) {
                 valueQuery += ")";
             });
 
-            pool.query('INSERT INTO ordered_menu (order_id, menu_id, count) ' + "VALUES " + valueQuery,
+            pool.query('INSERT INTO ordered_menu (order_id, menu_id, count) ' + 'VALUES ' + valueQuery,
                 function (err, rows) {
                     if (!err) {
                         callback(null, pool, order_id);
                     } else {
-                        res.json({"message": "fail"});
+                        res.json({'message': 'fail'});
                         console.log('Error while performing Query.', err);
                     }
                 });
@@ -92,16 +92,16 @@ function registerOrder(req, res, next) {
                         // 2. 현재 주문 수보다 충족 수가 작을 경우 처리
                         if (rows.length == 0) {
                             result = {
-				                "message":"success",
-                                "status": "waiting",
-                                "current_people_num": 1
+				                'message':'success',
+                                'status': 'waiting',
+                                'current_people_num': 1
                             };
                         }
                         else if ( (rows.length + 1) < rows[0].require_people_num ) {
                             result = {
-				                "message":"success",
-                                "status": "waiting",
-                                "current_people_num": rows.length
+				                'message':'success',
+                                'status': 'waiting',
+                                'current_people_num': rows.length
                             };
                         }
                         // 3. 현재 주문 수가 충족 수를 만족했을 때 처리
@@ -117,11 +117,11 @@ function registerOrder(req, res, next) {
                             matchOrder += ")";
 
                             result = {
-				                "message":"success",
-                                "status" : "match",
-                                "current_people_num": rows.length,
-                                "match_order_id" : matchOrder,
-                                "match_push_user_id" : matchPuchUser
+				                'message':'success',
+                                'status' : 'match',
+                                'current_people_num': rows.length,
+                                'match_order_id' : matchOrder,
+                                'match_push_user_id' : matchPuchUser
                             };
                         }
                         callback(null, pool, result);
@@ -144,7 +144,7 @@ function registerOrder(req, res, next) {
                             // result[].user_id에 해당하는 pushid에 푸쉬보내줄것
                             callback(null, result);
                         } else {
-                            res.json({"message": "fail"});
+                            res.json({'message': 'fail'});
                             console.log('Error while performing Query.', err);
                         }
                 });

@@ -29,7 +29,7 @@ function getCategories(req, res, next) {
             res.json(categories);
             console.log(categories);
         } else {
-            res.json({"message": "fail"});
+            res.json({'message': 'fail'});
             console.log('Error while performing Query.', err);
         }
     });

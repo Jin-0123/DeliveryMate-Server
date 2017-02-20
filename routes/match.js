@@ -20,7 +20,7 @@ function getMatch(req, res, next) {
     var matchList = [];
 
     pool.query('SELECT o.id AS order_id, s.id AS store_id, m.id AS main_menu_id, o.status AS status, o.total_price AS total_price, ' +
-                's.name AS store_name, m.name AS main_menu_name, ' +
+                's.name AS store_name, m.name AS main_menu_name, m.price AS main_menu_price, ' +
                 'm.image_url AS main_menu_image_url, m.require_people_num AS require_people_num ' +
                 'FROM orders o JOIN stores s ON o.store_id = s.id ' +
                             'JOIN menu m ON o.main_menu_id = m.id ' +
@@ -36,6 +36,7 @@ function getMatch(req, res, next) {
                     'status' : row.status,
                     'store_name' : row.store_name,
                     'main_menu_name' : row.main_menu_name,
+                    'main_menu_price' : row.main_menu_price,
                     'require_people_num' : row.require_people_num,
                     'main_menu_image_url' : row.main_menu_image_url,
                     'total_price' : row.total_price
