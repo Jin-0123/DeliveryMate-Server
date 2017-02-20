@@ -16,18 +16,12 @@ var pool = mysql.createPool({
 });
 
 
-
-// ** DATETIME 수정해야합니다 **
 function registerOrder(req, res, next) {
     var user_id = req.body.user_id;
     var store_id = req.body.store_id;
     var main_menu_id = req.body.main_menu_id;
     var extra_menu = req.body.extra_menu;
 
-    console.log(user_id)
-    console.log(store_id)
-    console.log(main_menu_id)
-    console.log(extra_menu)
     waterfall([
         function(callback){
             var expire_time = req.body.expire_time;
@@ -97,17 +91,16 @@ function registerOrder(req, res, next) {
                         // 2. 현재 주문 수보다 충족 수가 작을 경우 처리
                         if (rows.length == 0) {
                             result = {
-				"message":"success",
+				                "message":"success",
                                 "status": "waiting",
                                 "current_people_num": 1
                             };
                         }
                         else if ( (rows.length + 1) < rows[0].require_people_num ) {
                             result = {
-				"message":"success",
+				                "message":"success",
                                 "status": "waiting",
-                                "current_people_num": rows.length,
-                                "require_people_num": rows[0].require_people_num
+                                "current_people_num": rows.length
                             };
                         }
                         // 3. 현재 주문 수가 충족 수를 만족했을 때 처리
@@ -123,8 +116,9 @@ function registerOrder(req, res, next) {
                             matchOrder += ")";
 
                             result = {
-				"message":"success",
+				                "message":"success",
                                 "status" : "match",
+                                "current_people_num": rows.length,
                                 "match_order_id" : matchOrder,
                                 "match_push_user_id" : matchPuchUser
                             };
