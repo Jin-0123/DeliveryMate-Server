@@ -19,7 +19,7 @@ function getMatch(req, res, next) {
     var user_id = req.query.user_id;
     var matchList = [];
 
-    pool.query('SELECT o.id AS order_id, s.id AS store_id, m.id AS main_menu_id, o.status AS status, o.total_price AS total_price ' +
+    pool.query('SELECT o.id AS order_id, s.id AS store_id, m.id AS main_menu_id, o.status AS status, o.total_price AS total_price, ' +
                 's.name AS store_name, m.name AS main_menu_name, ' +
                 'm.image_url AS main_menu_image_url, m.require_people_num AS require_people_num ' +
                 'FROM orders o JOIN stores s ON o.store_id = s.id ' +

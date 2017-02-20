@@ -21,12 +21,13 @@ function registerOrder(req, res, next) {
     var store_id = req.body.store_id;
     var main_menu_id = req.body.main_menu_id;
     var extra_menu = req.body.extra_menu;
+    var total_price = req.body.total_price;
 
     waterfall([
         function(callback){
             var expire_time = req.body.expire_time;
-            pool.query('INSERT INTO orders (user_id, store_id, main_menu_id, status, expire_time) '+
-                        'VALUES (?,?,?,?,now())', [user_id, store_id, main_menu_id, "waiting"],
+            pool.query('INSERT INTO orders (user_id, store_id, main_menu_id, total_price, status, expire_time) '+
+                        'VALUES (?,?,?,?,?,now())', [user_id, store_id, main_menu_id, total_price, "waiting"],
                 function (err, rows) {
                     if (!err) {
                         callback(null, pool, rows.insertId);
