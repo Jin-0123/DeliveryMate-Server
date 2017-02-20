@@ -58,7 +58,7 @@ function getExtraManus(req, res, next) {
     var extraList = [];
     waterfall([
         function(callback){
-            pool.query('SELECT name AS extra_name, count AS extra_count, price AS extra_price '+ 
+            pool.query('SELECT m.id AS extra_id, name AS extra_name, count AS extra_count, price AS extra_price '+ 
                     'FROM ordered_menu om JOIN menu m ON om.menu_id = m.id '+ 
                     'WHERE om.order_id = ? AND m.type = "extra"', [order_id], 
                 function (err, rows) {
@@ -67,6 +67,7 @@ function getExtraManus(req, res, next) {
                             var extraList = [];
                             rows.forEach(function (row) {
                                 var extraItem = {
+                                    'extra_id' : row.extra_id,
                                     'extra_menu_name': row.extra_name,
                                     'extra_menu_count': row.extra_count,
                                     'extra_menu_price': row.extra_price
