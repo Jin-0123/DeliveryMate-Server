@@ -18,7 +18,7 @@ function getMatch(req, res, next) {
     var user_id = req.query.user_id;
     var matchList = [];
 
-    pool.query('SELECT o.id AS order_id, o.status AS status, s.name AS store_name, m.name AS main_menu_name ' +
+    pool.query('SELECT o.id AS order_id, o.status AS status, s.name AS store_name, m.name AS main_menu_name, m.image_url AS main_menu_image_url ' +
                 'FROM orders o JOIN stores s ON o.store_id = s.id ' +
                             'JOIN menu m ON o.main_menu_id = m.id ' +
                 'WHERE o.user_id = ? '+
@@ -30,7 +30,8 @@ function getMatch(req, res, next) {
                     'order_id' : row.order_id,
                     'status' : row.status,
                     'store_name' : row.store_name,
-                    'main_menu_name' : row.main_menu_name
+                    'main_menu_name' : row.main_menu_name,
+                    'main_menu_image_url' : row.main_menu_image_url
                 };
                 matchList.push(item)
             });
