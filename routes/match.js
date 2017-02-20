@@ -88,7 +88,7 @@ function getExtraManus(req, res, next) {
                 pool.query('SELECT o.id as matchOrders, o.user_id as user_id, m.require_people_num as require_people_num '+
                     'FROM orders o JOIN menu m ON o.main_menu_id = m.id '+
                     'WHERE o.status="waiting" AND o.store_id=? AND o.main_menu_id=? AND o.id!=? '+
-                    'ORDER BY o.expire_time ASC ',
+                    'ORDER BY o.expire_time DESC ',
                     [store_id, main_menu_id, order_id],
                     function (err, rows) {
                         if (!err) {
