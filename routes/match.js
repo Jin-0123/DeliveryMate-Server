@@ -25,7 +25,7 @@ function getMatch(req, res, next) {
                 'FROM orders o JOIN stores s ON o.store_id = s.id ' +
                             'JOIN menu m ON o.main_menu_id = m.id ' +
                 'WHERE o.user_id = ? '+
-                'ORDER BY o.status ASC ', [user_id], function (err, rows) {
+                'ORDER BY o.date_time DESC ', [user_id], function (err, rows) {
         if (!err) {
             rows.forEach(function (row) {
                 var item = {
