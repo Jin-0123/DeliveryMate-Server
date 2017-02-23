@@ -77,7 +77,7 @@ function getExtraManus(req, res, next) {
                             });
                             callback(null, pool, order_id, extraList);
                         } else {
-                            res.json({'message' : 'success'})
+                            callback(null, pool, order_id, extraList);
                         }
                     } else {
                         res.json({'message': 'fail'});
@@ -106,7 +106,7 @@ function getExtraManus(req, res, next) {
                                 };
                             }
                             else if ( (rows.length + 1) < rows[0].require_people_num ) {
-                                console.log(rows.length + 1)
+                                console.log(rows.length + 1);
                                 result = {
                                     'message':'success',
                                     'status': 'waiting',
