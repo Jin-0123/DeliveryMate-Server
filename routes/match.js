@@ -106,10 +106,11 @@ function getExtraManus(req, res, next) {
                                 };
                             }
                             else if ( (rows.length + 1) < rows[0].require_people_num ) {
+                                console.log(rows.length + 1)
                                 result = {
                                     'message':'success',
                                     'status': 'waiting',
-                                    'current_people_num': rows.length,
+                                    'current_people_num': rows.length + 1,
                                     'extra_menu' : extraList
                                 };
                             }

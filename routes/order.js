@@ -101,7 +101,7 @@ function registerOrder(req, res, next) {
                             result = {
 				                'message':'success',
                                 'status': 'waiting',
-                                'current_people_num': rows.length
+                                'current_people_num': rows.length + 1
                             };
                         }
                         // 3. 현재 주문 수가 충족 수를 만족했을 때 처리
