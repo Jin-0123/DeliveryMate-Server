@@ -19,7 +19,7 @@ function getStores(req, res, next) {
     var category_id = req.query.category_id;
     var dong_code = req.query.dong_code;
     var stores = [];
-    pool.query('SELECT s.id, s.name AS name, s.image_url AS image_url '+
+    pool.query('SELECT DISTINCT s.id, s.name AS name, s.image_url AS image_url '+
                 'FROM stores s JOIN delivery_zones d ON s.id = d.store_id ' +
                 'WHERE s.category_id = ? AND (d.dong_code LIKE ? OR d.dong_code = ?)',
                 [category_id, dong_code.substr(0,5)+'%', dong_code], function (err, rows) {
